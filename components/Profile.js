@@ -279,7 +279,7 @@ const Profile = ({onMenuItemClick}) => {
       <ProfileHeader>
         <div className='box-1'>
           <div  onClick={() => onMenuItemClick('home')}><FaArrowLeft /></div>
-          <HeaderImage src={croppedImage === null ?  'images/person.jpeg' : croppedImage} />
+          <HeaderImage src={ croppedImage || "images/person.jpeg"} />
           <h3>{name} {Lname}</h3>
         </div>
         <div className='date'>
@@ -297,7 +297,7 @@ const Profile = ({onMenuItemClick}) => {
         <div>
       <RoleLabel>PROFILE IMAGE</RoleLabel>
       <div>
-        <Portfolio src={croppedImage === null ?  'images/person.jpeg' : croppedImage} />
+        <Portfolio src={croppedImage || "images/person.jpeg"} />
       </div>
       <div className='image-portfolio'>
       
