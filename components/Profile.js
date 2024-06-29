@@ -126,12 +126,44 @@ const Profile = ({onMenuItemClick}) => {
   const [isActivityTrackingRequired, setIsActivityTrackingRequired] = useState(true);
   useEffect(() => {
     const savedRole = localStorage.getItem('role');
+    const savedHr = localStorage.getItem('hr');
+    const savedManager = localStorage.getItem('manager');
+    const savedLeads = localStorage.getItem('leads');
     const savedOnboardingDate = localStorage.getItem('onboardingDate');
-const savedIsOnboarding=localStorage.getItem('isOnboardingRequired');
-setIsOnboardingRequired(savedIsOnboarding || true);
-    setRole(savedRole );
-    setOnboardingDate(savedOnboardingDate);
+    const savedName = localStorage.getItem('name');
+    const savedLname = localStorage.getItem('lastName');
+    const savedEmail = localStorage.getItem('email');
+    const savedPhone = localStorage.getItem('phoneNumber');
+    const savedPosition = localStorage.getItem('position');
+    const savedIsOfficeTourRequired = localStorage.getItem('isOfficeTourRequired') === 'true';
+    const savedIsOnboardingRequired = localStorage.getItem('isOnboardingRequired') === 'true';
+    const savedIsManagementIntroductoryRequired = localStorage.getItem('isManagementIntroductoryRequired') === 'true';
+    const savedIsWorkToolsRequired = localStorage.getItem('isWorkToolsRequired') === 'true';
+    const savedIsMeetYourColleaguesRequired = localStorage.getItem('isMeetYourColleaguesRequired') === 'true';
+    const savedIsDutiesJournalRequired = localStorage.getItem('isDutiesJournalRequired') === 'true';
+    const savedIsRequestsHandlingRequired = localStorage.getItem('isRequestsHandlingRequired') === 'true';
+    const savedIsActivityTrackingRequired = localStorage.getItem('isActivityTrackingRequired') === 'true';
+
+    if (savedRole) setRole(savedRole);
+    if (savedHr) setHr(savedHr);
+    if (savedManager) setManager(savedManager);
+    if (savedLeads) setLeads(savedLeads);
+    if (savedOnboardingDate) setOnboardingDate(savedOnboardingDate);
+    if (savedName) setName(savedName);
+    if (savedLname) setLName(savedLname);
+    if (savedEmail) setEmail(savedEmail);
+    if (savedPhone) setPhone(savedPhone);
+    if (savedPosition) setPosition(savedPosition);
+    setIsOfficeTourRequired(savedIsOfficeTourRequired);
+    setIsOnboardingRequired(savedIsOnboardingRequired);
+    setIsManagementIntroductoryRequired(savedIsManagementIntroductoryRequired);
+    setIsWorkToolsRequired(savedIsWorkToolsRequired);
+    setIsMeetYourColleaguesRequired(savedIsMeetYourColleaguesRequired);
+    setIsDutiesJournalRequired(savedIsDutiesJournalRequired);
+    setIsRequestsHandlingRequired(savedIsRequestsHandlingRequired);
+    setIsActivityTrackingRequired(savedIsActivityTrackingRequired);
   }, []);
+
 
   const handleSaveProfile = () => {
     localStorage.setItem('role', role);
