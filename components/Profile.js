@@ -266,7 +266,6 @@ const Profile = ({onMenuItemClick}) => {
       setCroppedImage(croppedImage);
       setIsVisible(false);
 
-            localStorage.setItem('croppedImage', croppedImg);
            
 
     } catch (e) {
