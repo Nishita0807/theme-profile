@@ -1,5 +1,15 @@
-import "@/styles/globals.css";
-
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+import GlobalStyle from '../styles/global';
+import "../styles/sidebar.css"
+import "../styles/themewindow.css"
+import "../styles/sidebar2.css"
+import "../styles/profile.css";
+function App({ Component, pageProps }) {
+  return (
+    <>
+      <GlobalStyle />
+      <Component {...pageProps} />
+    </>
+  );
 }
+
+export default App;

@@ -1,0 +1,25 @@
+h4{
+color: grey;
+opacity: 0.5;
+padding-left: 8px;
+}
+.number{
+    margin-left: 100px;
+    background-color: #c5d2fc;
+    padding: 4px 18px;
+    border-radius: 18px;
+    color:#6473ad;
+    
+}
+
+@media (max-width: 900px){
+    .number{
+        margin-left: 50px;
+    }
+}
+
+@media (max-width: 600px){
+    .number{
+        display: none;
+    }
+}
