@@ -141,6 +141,7 @@ const Profile = ({onMenuItemClick}) => {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [croppedImage, setCroppedImage] = useState(null);
+  const [isVisible,setIsVisible]=useState(true);
   useEffect(() => {
     const savedRole = localStorage.getItem('role');
     const savedHr = localStorage.getItem('hr');
@@ -232,8 +233,7 @@ const Profile = ({onMenuItemClick}) => {
     setIsDutiesJournalRequired(true);
     setIsRequestsHandlingRequired(true);
     setIsActivityTrackingRequired(true);
-    setImageSrc('images/person.jpeg');
-    setCroppedImage(null); // Clear cropped image
+    setImageSrc(null);
     localStorage.removeItem('croppedImage'); 
 
   }
@@ -264,10 +264,10 @@ const Profile = ({onMenuItemClick}) => {
     try {
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
       setCroppedImage(croppedImage);
-      setImageSrc(null); // Close the cropper by setting imageSrc to null
+      setIsVisible(false);
 
             localStorage.setItem('croppedImage', croppedImg);
-
+           
 
     } catch (e) {
       console.error(e);
@@ -279,7 +279,7 @@ const Profile = ({onMenuItemClick}) => {
       <ProfileHeader>
         <div className='box-1'>
           <div  onClick={() => onMenuItemClick('home')}><FaArrowLeft /></div>
-          <HeaderImage  src={imageSrc === null ? "images/person.jpeg" :croppedImage}/>
+          <HeaderImage src={imageSrc === null ? "/images/person.jpeg":croppedImage} />
           <h3>{name} {Lname}</h3>
         </div>
         <div className='date'>
@@ -297,7 +297,7 @@ const Profile = ({onMenuItemClick}) => {
         <div>
       <RoleLabel>PROFILE IMAGE</RoleLabel>
       <div>
-        <Portfolio src={imageSrc === null ? "images/person.jpeg" :croppedImage} />
+        <Portfolio src={imageSrc === null ? "/images/person.jpeg":croppedImage} />
       </div>
       <div className='image-portfolio'>
       
@@ -309,7 +309,7 @@ const Profile = ({onMenuItemClick}) => {
           {/* Hidden file input */}
           <input id="fileInput" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleFileChange} />
       </div>
-      {imageSrc && (
+      {imageSrc &&  isVisible && (
         <div>
           <div style={{ position: 'fixed', top:"12px",left:"7%",width: '100%', height: 400,zIndex:1 }}>
             <Cropper
