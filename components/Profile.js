@@ -104,7 +104,7 @@ const ToggleButton = styled.button`
   margin-right:12px;
 `;
 
-const Profile = () => {
+const Profile = ({onMenuItemClick}) => {
   const [role, setRole] = useState('');
   const [onboardingDate, setOnboardingDate] = useState('');
   const [isOnboardingRequired, setIsOnboardingRequired] = useState(true);
@@ -139,7 +139,7 @@ const Profile = () => {
     <ProfileContainer>
       <ProfileHeader>
         <div className='box-1'>
-          <div><FaArrowLeft /></div>
+          <div  onClick={() => onMenuItemClick('home')}><FaArrowLeft /></div>
           <HeaderImage src="/images/headerp.png" />
           <h3>Russel Sims</h3>
         </div>

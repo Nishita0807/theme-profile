@@ -40,7 +40,7 @@ height:900px;
                        </div>
 <div className='logout'>
 <ProfileImage src="/images/profile.png" alt="person"/>
-<FaArrowRight />
+<FaArrowRight onClick={() => onMenuItemClick('home')} />
     </div>       </SidebarContainer>
     );
   };

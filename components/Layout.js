@@ -29,7 +29,7 @@ const Layout = () => {
         <Sidebar2 onLogout={handleLogout} onMenuItemClick={handleMenuItemClick}/>
       )}
       {selectedMenu === 'home' && <ThemeWindow />}
-      {selectedMenu === 'profile' && <Profile />}
+      {selectedMenu === 'profile' && <Profile onMenuItemClick={handleMenuItemClick} />}
       {/* Add other components for other menu items as needed */}
     </LayoutContainer>
   );
