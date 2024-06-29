@@ -106,14 +106,18 @@ const ToggleButton = styled.button`
 
 const Profile = ({onMenuItemClick}) => {
   const [role, setRole] = useState('');
+  const [hr,setHr]=useState('');
+  const [manager,setManager]=useState('');
+  const [leads,setLeads]=useState('');
   const [onboardingDate, setOnboardingDate] = useState('');
-  const [isOnboardingRequired, setIsOnboardingRequired] = useState(true);
   const [name, setName] = useState('Russel');
   const [Lname, setLName] = useState('Sims');
   const [email, setEmail] = useState('russel@mycompany.com');
   const [phone, setPhone] = useState('+1 255 29345690');
   const [position, setPosition] = useState('iOS Developer');
   const [isOfficeTourRequired, setIsOfficeTourRequired] = useState(true);
+  const [isOnboardingRequired, setIsOnboardingRequired] = useState(true);
+
   const [isManagementIntroductoryRequired, setIsManagementIntroductoryRequired] = useState(false);
   const [isWorkToolsRequired, setIsWorkToolsRequired] = useState(true);
   const [isMeetYourColleaguesRequired, setIsMeetYourColleaguesRequired] = useState(true);
@@ -123,18 +127,60 @@ const Profile = ({onMenuItemClick}) => {
   useEffect(() => {
     const savedRole = localStorage.getItem('role');
     const savedOnboardingDate = localStorage.getItem('onboardingDate');
-
-    setRole(savedRole || '');
-    setOnboardingDate(savedOnboardingDate || '');
+const savedIsOnboarding=localStorage.getItem('isOnboardingRequired');
+setIsOnboardingRequired(savedIsOnboarding || true);
+    setRole(savedRole );
+    setOnboardingDate(savedOnboardingDate);
   }, []);
 
   const handleSaveProfile = () => {
     localStorage.setItem('role', role);
+    localStorage.setItem('hr', hr);
+    localStorage.setItem('manager', manager);
+    localStorage.setItem('leads', leads);
     localStorage.setItem('onboardingDate', onboardingDate);
     localStorage.setItem('isOnboardingRequired', isOnboardingRequired.toString());
+    localStorage.setItem('name',name);
+    localStorage.setItem('lastName',Lname);
+    localStorage.setItem('email',email);
+    localStorage.setItem('phoneNumber',phone);
+    localStorage.setItem('position',position);
+    localStorage.setItem('isOfficeTourRequired', isOfficeTourRequired.toString());
+    localStorage.setItem('isManagementIntroductoryRequired', isManagementIntroductoryRequired.toString());
+    localStorage.setItem('isWorkToolsRequired', isWorkToolsRequired.toString());
+
+    localStorage.setItem('isMeetYourColleaguesRequired', isMeetYourColleaguesRequired.toString());
+
+    localStorage.setItem('isDutiesJournalRequired', isDutiesJournalRequired.toString());
+
+    localStorage.setItem('isRequestsHandlingRequired', isRequestsHandlingRequired.toString());
+
+    localStorage.setItem('isActivityTrackingRequired', isActivityTrackingRequired.toString());
+
     alert('Profile saved successfully!');
   };
 
+  const handleCancelProfile=()=>{
+    setRole('');
+    setHr('');
+    setManager('');
+    setLeads('');
+    setOnboardingDate('');
+    setName('Russel');
+    setLName('Sims');
+    setEmail('russel@mycompany.com');
+    setPhone('+1 255 29345690');
+    setPosition('iOS Developer');
+    setIsOfficeTourRequired(true);
+    setIsOnboardingRequired(true);
+    setIsManagementIntroductoryRequired(false);
+    setIsWorkToolsRequired(true);
+    setIsMeetYourColleaguesRequired(true);
+    setIsDutiesJournalRequired(true);
+    setIsRequestsHandlingRequired(true);
+    setIsActivityTrackingRequired(true);
+
+  }
   return (
     <ProfileContainer>
       <ProfileHeader>
@@ -251,7 +297,7 @@ const Profile = ({onMenuItemClick}) => {
               <div className='role'>
                 HR
               </div>
-              <Select value={role} onChange={(e) => setRole(e.target.value)}>
+              <Select value={hr} onChange={(e) => setHr(e.target.value)}>
                 <option value="">Select HR</option>
                 <option value="1">Katte Middleton</option>
                 <option value="2">Ganesh Kumar</option>
@@ -262,22 +308,22 @@ const Profile = ({onMenuItemClick}) => {
               <div className='role'>
                 Manager
               </div>
-              <Select value={role} onChange={(e) => setRole(e.target.value)}>
+              <Select value={manager} onChange={(e) => setManager(e.target.value)}>
                 <option value="">Select Manager</option>
-                <option value="1">Kirik Matrohin</option>
-                <option value="2">BK Sharma</option>
-                <option value="3">KK Deewan</option>
+                <option value="4">Kirik Matrohin</option>
+                <option value="5">BK Sharma</option>
+                <option value="6">KK Deewan</option>
               </Select>
             </div>
             <div className='role-select'>
               <div className='role'>
                 Lead
               </div>
-              <Select value={role} onChange={(e) => setRole(e.target.value)}>
+              <Select value={leads} onChange={(e) => setLeads(e.target.value)}>
                 <option value="">Select Lead</option>
-                <option value="1">Eugene Humell</option>
-                <option value="2">Rekha</option>
-                <option value="3">Jaya</option>
+                <option value="7">Eugene Humell</option>
+                <option value="8">Rekha</option>
+                <option value="9">Jaya</option>
               </Select>
             </div>
           </div>
@@ -454,8 +500,8 @@ const Profile = ({onMenuItemClick}) => {
 
 
       <div className='s-c'>
-        <div className='save-c'>Save Changes</div>
-        <div className='cancel'>Cancel</div>
+        <div className='save-c' onClick={handleSaveProfile}>Save Changes</div>
+        <div className='cancel' onClick={handleCancelProfile}>Cancel</div>
       </div>
       
     </ProfileContainer>
