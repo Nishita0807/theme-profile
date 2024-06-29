@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import styled from 'styled-components';
 import { FaArrowLeft, FaCopy, FaDumpster, FaImage } from 'react-icons/fa';
+import Cropper from 'react-easy-crop';
 
+import { getCroppedImg } from './cropImage';
 const ProfileContainer = styled.div`
   flex: 1;
   padding: 20px;
@@ -124,6 +126,11 @@ const Profile = ({onMenuItemClick}) => {
   const [isDutiesJournalRequired, setIsDutiesJournalRequired] = useState(true);
   const [isRequestsHandlingRequired, setIsRequestsHandlingRequired] = useState(true);
   const [isActivityTrackingRequired, setIsActivityTrackingRequired] = useState(true);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [croppedImage, setCroppedImage] = useState(null);
   useEffect(() => {
     const savedRole = localStorage.getItem('role');
     const savedHr = localStorage.getItem('hr');
@@ -162,6 +169,10 @@ const Profile = ({onMenuItemClick}) => {
     setIsDutiesJournalRequired(savedIsDutiesJournalRequired);
     setIsRequestsHandlingRequired(savedIsRequestsHandlingRequired);
     setIsActivityTrackingRequired(savedIsActivityTrackingRequired);
+    const savedImage = localStorage.getItem('croppedImage');
+    if (savedImage) {
+      setCroppedImage(savedImage);
+    }
   }, []);
 
 
@@ -188,7 +199,7 @@ const Profile = ({onMenuItemClick}) => {
     localStorage.setItem('isRequestsHandlingRequired', isRequestsHandlingRequired.toString());
 
     localStorage.setItem('isActivityTrackingRequired', isActivityTrackingRequired.toString());
-
+ localStorage.setItem('croppedImage',croppedImage);
     alert('Profile saved successfully!');
   };
 
@@ -211,8 +222,48 @@ const Profile = ({onMenuItemClick}) => {
     setIsDutiesJournalRequired(true);
     setIsRequestsHandlingRequired(true);
     setIsActivityTrackingRequired(true);
+    setImageSrc('/images/person.jpeg');
+    setCroppedImage(null); // Clear cropped image
+    localStorage.removeItem('croppedImage'); 
 
   }
+
+
+
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageDataUrl = await readFile(file);
+      setImageSrc(imageDataUrl);
+    }
+  };
+
+  const readFile = (file) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => resolve(reader.result), false);
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const showCroppedImage = useCallback(async () => {
+    try {
+      const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
+      setCroppedImage(croppedImage);
+      setImageSrc(null); // Close the cropper by setting imageSrc to null
+
+            localStorage.setItem('croppedImage', croppedImg);
+
+
+    } catch (e) {
+      console.error(e);
+    }
+  }, [imageSrc, croppedAreaPixels]);
+
   return (
     <ProfileContainer>
       <ProfileHeader>
@@ -233,14 +284,38 @@ const Profile = ({onMenuItemClick}) => {
       </ProfileHeader>
       <ProfileContent>
         <ProfileImageWrapper>
-        <RoleLabel>PROFILE IMAGE</RoleLabel>
         <div>
-         <Portfolio src='/images/person.jpeg'/>
+      <RoleLabel>PROFILE IMAGE</RoleLabel>
+      <div>
+        <Portfolio src={croppedImage || '/images/person.jpeg'} />
+      </div>
+      <div className='image-portfolio'>
+      
+        <button onClick={() => document.getElementById('fileInput').click()}>
+        <FaImage />
+          <div>
+          Change Profile Image
+            </div></button>
+          {/* Hidden file input */}
+          <input id="fileInput" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleFileChange} />
+      </div>
+      {imageSrc && (
+        <div>
+          <div style={{ position: 'fixed', top:"12px",left:"7%",width: '100%', height: 400,zIndex:1 }}>
+            <Cropper
+              image={imageSrc}
+              crop={crop}
+              zoom={zoom}
+              aspect={1}
+              onCropChange={setCrop}
+              onZoomChange={setZoom}
+              onCropComplete={onCropComplete}
+            />
+          </div>
+          <button onClick={showCroppedImage}>Crop Image</button>
         </div>
-        <div className='image-portfolio'>
-          <FaImage/>
-          <div>Change Profile Image</div>
-        </div>
+      )}
+    </div>
         <RoleLabel className='employee'>EMPLOYEE DETAILS</RoleLabel>
         <div>
             <div className='role-select-1'>
