@@ -13,6 +13,12 @@ flex-direction:column;
 border-top-left-radius:12px;
 padding-top:12px;
 height:900px;
+ @media (max-width:1100px){
+ height:2000px;
+ }
+ @media (max-width:700px){
+ height:2100px;
+ }
   `;
   const HrImage=styled.img`
   width: 50px;

@@ -23,6 +23,12 @@ const ProfileHeader = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
+  @media (max-width:600px){
+   display: flex;
+   flex-direction:column;
+   justify-content:center;
+   align-items:center;
+  }
 `;
 
 const ProfileContent = styled.div`
@@ -30,6 +36,10 @@ const ProfileContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
+  @media (max-width:1100px){
+  display:flex;
+  flex-direction:column;
+  }
 `;
 
 const ProfileImageWrapper = styled.div`
@@ -269,8 +279,8 @@ const Profile = ({onMenuItemClick}) => {
       <ProfileHeader>
         <div className='box-1'>
           <div  onClick={() => onMenuItemClick('home')}><FaArrowLeft /></div>
-          <HeaderImage src="/images/headerp.png" />
-          <h3>Russel Sims</h3>
+          <HeaderImage src={croppedImage} />
+          <h3>{name} {Lname}</h3>
         </div>
         <div className='date'>
           <div>

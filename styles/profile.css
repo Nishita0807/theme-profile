@@ -186,3 +186,11 @@ button{
     gap:12px;
     color:#007bff;
 }
+
+
+
+@media (max-width:600px ){
+.s-c{
+    flex-direction: column;
+}
+}
