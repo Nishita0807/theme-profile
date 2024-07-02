@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FaCalendar, FaCircle, FaInbox, FaPager, FaParagraph, FaTable, FaThemeco, FaUser } from 'react-icons/fa';
 
 const SidebarContainer = styled.div`
   width: 250px;
@@ -51,6 +50,12 @@ const MenuItem = styled.div`
 `;
 
 const Icon = styled.div`
+display:flex;
+align-itmes:center;
+justify-content:center;
+width:20px;
+height:20px;
+  object-fit: cover;
   margin-right: 10px;
 
   @media (max-width: 600px) {
@@ -72,31 +77,31 @@ const Sidebar = ({ selectedMenu, onMenuItemClick }) => {
       <Menu>
         <h4>Menu</h4>
         <MenuItem>
-          <Icon><FaTable /></Icon><Text>Home</Text>
+          <Icon><img src='/images/home.jpeg'/></Icon><Text>Home</Text>
         </MenuItem>
         <MenuItem>
-          <Icon><FaCalendar /></Icon><Text>Schedule</Text>
+          <Icon><img src='/images/schedule.jpeg'/></Icon><Text>Schedule</Text>
         </MenuItem>
         <MenuItem>
-          <Icon><FaPager /></Icon><Text>Recommendation</Text>
+          <Icon><img src='/images/rec.jpeg'/></Icon><Text>Recommendation</Text>
         </MenuItem>
         <MenuItem>
-          <Icon><FaParagraph /></Icon><Text>Analytics</Text>
+          <Icon><img src='/images/Analytics.jpeg'/></Icon><Text>Analytics</Text>
         </MenuItem>
         <MenuItem $active={selectedMenu === 'profile'} onClick={() => onMenuItemClick('profile')}>
-          <Icon><FaUser /></Icon><Text>Profile</Text>
+          <Icon><img src='/images/profileIc.jpeg'/></Icon><Text>Profile</Text>
         </MenuItem>
         <MenuItem>
-          <Icon><FaInbox /></Icon><Text>Inbox</Text> <span className='number'>8</span>
+          <Icon><img src='/images/inbox.jpeg'/></Icon><Text>Inbox</Text> <span className='number'>8</span>
         </MenuItem>
         <MenuItem $active={selectedMenu === 'home'} onClick={() => onMenuItemClick('home')}>
-          <Icon><FaThemeco /></Icon><Text>Theme</Text>
+          <Icon><img src='/images/themes.jpeg'/></Icon><Text>Theme</Text>
         </MenuItem>
       </Menu>
       <Menu>
         <h4>Account</h4>
         <MenuItem>
-          <Icon><FaCircle /></Icon><Text>Settings</Text>
+          <Icon><img src='/images/setting.jpeg'/></Icon><Text>Settings</Text>
         </MenuItem>
       </Menu>
     </SidebarContainer>

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FaArrowRight, FaBorderAll, FaCircle, FaFile, FaThemeco, FaUser } from 'react-icons/fa';
 const Sidebar2 = ({ selectedMenu, onMenuItemClick }) => {
   const SidebarContainer = styled.div`
   width:80px;
@@ -38,15 +37,15 @@ height:900px;
 
       
 <div className='p-icons'>
- <div onClick={() => onMenuItemClick('home')}><FaBorderAll/></div>
- <div className='active' ><FaUser/></div>
- <div><FaFile/></div>
- <div><FaCircle/></div>
+ <div onClick={() => onMenuItemClick('home')}><img src='/images/column.png'/></div>
+ <div className='active' ><img src='/images/group.png'/></div>
+ <div><img src='/images/file.png'/></div>
+ <div><img src='/images/settings.png'/></div>
 </div>
                        </div>
 <div className='logout'>
 <ProfileImage src="/images/profile.png" alt="person"/>
-<FaArrowRight onClick={() => onMenuItemClick('home')} />
+<img src='/images/logout.png' onClick={() => onMenuItemClick('home')} />
     </div>       </SidebarContainer>
     );
   };

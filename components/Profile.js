@@ -1,6 +1,6 @@
 import React, { useState, useEffect,useCallback } from 'react';
 import styled from 'styled-components';
-import { FaArrowLeft, FaCopy, FaDumpster, FaImage } from 'react-icons/fa';
+import { FaArrowLeft, FaCopy, FaImage } from 'react-icons/fa';
 import Cropper from 'react-easy-crop';
 
 import { getCroppedImg } from './cropImage';
@@ -278,7 +278,7 @@ const Profile = ({onMenuItemClick}) => {
       <ProfileHeader>
         <div className='box-1'>
           <div  onClick={() => onMenuItemClick('home')}><FaArrowLeft /></div>
-          <HeaderImage src={imageSrc === null ? "/images/person.jpeg":croppedImage} />
+          <HeaderImage src={imageSrc === null ? "/images/person2.png":croppedImage} />
           <h3>{name} {Lname}</h3>
         </div>
         <div className='date'>
@@ -286,7 +286,7 @@ const Profile = ({onMenuItemClick}) => {
             Added on 21.04.2022
           </div>
           <div className='delete'>
-            <FaDumpster />
+          <img src='/images/bin.png'/>
             <div>Delete</div>
           </div>
         </div>
@@ -296,7 +296,7 @@ const Profile = ({onMenuItemClick}) => {
         <div>
       <RoleLabel>PROFILE IMAGE</RoleLabel>
       <div>
-        <Portfolio src={imageSrc === null ? "/images/person.jpeg":croppedImage} />
+        <Portfolio src={imageSrc === null ? "/images/person2.png":croppedImage} />
       </div>
       <div className='image-portfolio'>
       
